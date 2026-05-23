@@ -6,6 +6,10 @@
 
 */
 
+// SYNTAX FOR THE SOCKET
+//.           IP_TYPE      STREAM TYPE    ai_protocol(TCP or UDP)
+// int socket(int domain,  int type,      int protocol)
+
 #include <arpa/inet.h>
 #include <errno.h>
 #include <netdb.h>
