@@ -28,6 +28,8 @@ int main() {
 
   struct addrinfo hints, *res;
 
+  memset(&hints, 0, sizeof hints);
+
   // prefill some data into the hints
   hints.ai_family = AF_UNSPEC;
   hints.ai_flags = AI_PASSIVE; // means - bind my own ip address .. you can ofc
