@@ -25,43 +25,40 @@
 #include <sys/types.h>
 
 int main() {
+    struct addrinfo hints, *res;
 
-  struct addrinfo hints, *res;
+    memset(&hints, 0, sizeof hints);
 
-  memset(&hints, 0, sizeof hints);
+    // prefill some data into the hints
+    hints.ai_family = AF_UNSPEC;
+    hints.ai_flags = AI_PASSIVE;  // means - bind my own ip address .. you can ofc
+                                  // bind another local ip address(but then pass it
+                                  // to getaddrinfo after dropping this line)
+    hints.ai_socktype = SOCK_STREAM;
 
-  // prefill some data into the hints
-  hints.ai_family = AF_UNSPEC;
-  hints.ai_flags = AI_PASSIVE; // means - bind my own ip address .. you can ofc
-                               // bind another local ip address(but then pass it
-                               // to getaddrinfo after dropping this line)
-  hints.ai_socktype = SOCK_STREAM;
+    int status;
 
-  int status;
+    if ((status = getaddrinfo(NULL, "3490", &hints, &res)) != 0) {
+        fprintf(stderr, "failed to process getaddrinfo: %s\n", gai_strerror(status));
+        return 1;
+    }
 
-  if ((status = getaddrinfo(NULL, "3490", &hints, &res)) != 0) {
-    fprintf(stderr, "failed to process getaddrinfo: %s\n",
-            gai_strerror(status));
-    return 1;
-  }
+    int socketfd;
 
-  int socketfd;
+    if ((socketfd = socket(res->ai_family, res->ai_socktype, res->ai_protocol)) == -1) {
+        fprintf(stderr, "failed to process socket() method: %s\n", strerror(errno));
+        return 2;
+    }
 
-  if ((socketfd = socket(res->ai_family, res->ai_socktype, res->ai_protocol)) ==
-      -1) {
-    fprintf(stderr, "failed to process socket() method: %s\n", strerror(errno));
-    return 2;
-  }
+    // bind it to the port we passed in to the getaddrinfo
+    int bindstatus;
 
-  // bind it to the port we passed in to the getaddrinfo
-  int bindstatus;
+    if ((bindstatus = bind(socketfd, res->ai_addr, res->ai_addrlen)) == -1) {
+        fprintf(stderr, "failed to process bind() method: %s\n", strerror(errno));
+        return 3;
+    }
 
-  if ((bindstatus = bind(socketfd, res->ai_addr, res->ai_addrlen)) == -1) {
-    fprintf(stderr, "failed to process bind() method: %s\n", strerror(errno));
-    return 3;
-  }
-
-  return 0;
+    return 0;
 }
 
 // OLD Codes generally have hardcoded sockaddr_in structs

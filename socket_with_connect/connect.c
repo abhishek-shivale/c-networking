@@ -29,49 +29,44 @@
 #include <sys/types.h>
 
 int main() {
+    struct addrinfo hints, *res;
 
-  struct addrinfo hints, *res;
+    memset(&hints, 0, sizeof hints);
 
-  memset(&hints, 0, sizeof hints);
+    hints.ai_family = AF_UNSPEC;
+    hints.ai_socktype = SOCK_STREAM;
 
-  hints.ai_family = AF_UNSPEC;
-  hints.ai_socktype = SOCK_STREAM;
+    int status;
 
-  int status;
+    if ((status = getaddrinfo("www.example.com", "3490", &hints, &res)) != 0) {
+        fprintf(stderr, "unable to process with getaddrinfo() : %s \n", gai_strerror(status));
+        return 1;
+    }
 
-  if ((status = getaddrinfo("www.example.com", "3490", &hints, &res)) != 0) {
-    fprintf(stderr, "unable to process with getaddrinfo() : %s \n",
-            gai_strerror(status));
-    return 1;
-  }
+    // ofc again I am mentioning here that we should traverse the linked list
+    // pointed by the res for the better results
+    // here I am assuming that the first node has the correct data .. for more
+    // info see the first folder in this repo
 
-  // ofc again I am mentioning here that we should traverse the linked list
-  // pointed by the res for the better results
-  // here I am assuming that the first node has the correct data .. for more
-  // info see the first folder in this repo
+    //  now we need to get a socket fd
+    int socketfd;
 
-  //  now we need to get a socket fd
-  int socketfd;
+    if ((socketfd = socket(res->ai_family, res->ai_socktype, res->ai_protocol)) == -1) {
+        // kuch to hil gya
+        fprintf(stderr, "unable to get the socket fd using socket() : %s \n", strerror(errno));
+        return 2;
+    }
 
-  if ((socketfd = socket(res->ai_family, res->ai_socktype, res->ai_protocol)) ==
-      -1) {
-    // kuch to hil gya
-    fprintf(stderr, "unable to get the socket fd using socket() : %s \n",
-            strerror(errno));
-    return 2;
-  }
+    // FINALLY the charm of the connect()
 
-  // FINALLY the charm of the connect()
+    int connect_status;
+    if ((connect_status = connect(socketfd, res->ai_addr, res->ai_addrlen)) == -1) {
+        // kuch to fas gya
+        fprintf(stderr, "unable to connnect(): %s\n", strerror(errno));
+        return 3;
+    }
 
-  int connect_status;
-  if ((connect_status = connect(socketfd, res->ai_addr, res->ai_addrlen)) ==
-      -1) {
-    // kuch to fas gya
-    fprintf(stderr, "unable to connnect(): %s\n", strerror(errno));
-    return 3;
-  }
-
-  return 0;
+    return 0;
 }
 
 /*
