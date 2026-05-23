@@ -2,7 +2,7 @@
 
 > "The hardest part of any journey is the first step. The second hardest part is the socket() call."
 
-Welcome to my personal laboratory for mastering network programming in C. This repository is a living document of my progress through the legendary **[Beej's Guide to Network Programming](https://beej.us/guide/bgnet/)**. 
+Welcome to my personal laboratory for mastering network programming in C. This repository is a living document of my progress through the legendary **[Beej's Guide to Network Programming](https://beej.us/guide/bgnet/)**.
 
 ![C](https://img.shields.io/badge/Language-C-blue.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
@@ -28,22 +28,25 @@ Right now, I'm laying the foundation with the essential system calls. Each direc
 ## 🗺️ Roadmap & Progress
 
 ### Phase 1: The Fundamentals
+
 - [x] **IP Addresses & Structs** (`struct addrinfo`, `sockaddr_in`)
 - [x] **getaddrinfo()** — Prepare to launch!
 - [x] **socket()** — Get the File Descriptor
 - [x] **bind()** — What port am I on?
 - [x] **connect()** — Hey, you!
-- [ ] **listen()** — Will somebody please call me?
-- [ ] **accept()** — "Thank you for calling port 3490."
+- [x] **listen()** — Will somebody please call me?
+- [x] **accept()** — "Thank you for calling port 3490."
 - [ ] **send() & recv()** — Talk to me, baby!
 - [ ] **sendto() & recvfrom()** — Datagram-style
 
 ### Phase 2: Building the Apps
+
 - [ ] **Simple Stream Server**
 - [ ] **Simple Stream Client**
 - [ ] **Datagram Sockets**
 
 ### Phase 3: Advanced Techniques
+
 - [ ] **Blocking & Non-blocking**
 - [ ] **poll() / select()** — Synchronous I/O Multiplexing
 - [ ] **Handling Partial sends**
@@ -67,4 +70,4 @@ I'm keeping my notes directly inside the source files. You'll find my "Aha!" mom
 
 ---
 
-*“If you're not failing, you're not learning.”* — Someone who probably had a lot of `bind()` errors.
+_“If you're not failing, you're not learning.”_ — Someone who probably had a lot of `bind()` errors.
