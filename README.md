@@ -36,13 +36,13 @@ Right now, I'm laying the foundation with the essential system calls. Each direc
 - [x] **connect()** — Hey, you!
 - [x] **listen()** — Will somebody please call me?
 - [x] **accept()** — "Thank you for calling port 3490."
-- [ ] **send() & recv()** — Talk to me, baby!
-- [ ] **sendto() & recvfrom()** — Datagram-style
+- [x] **send() & recv()** — Talk to me, baby!
+- [x] **sendto() & recvfrom()** — Datagram-style
 
 ### Phase 2: Building the Apps
 
-- [ ] **Simple Stream Server**
-- [ ] **Simple Stream Client**
+- [x] **Simple Stream Server**
+- [x] **Simple Stream Client**
 - [ ] **Datagram Sockets**
 
 ### Phase 3: Advanced Techniques
