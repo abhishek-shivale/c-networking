@@ -1,5 +1,13 @@
 /*
    THIS SERVER will send "Hello World" out oer a stream connection
+
+   getaddrinfo
+   in loop - socket and bind
+   listen
+   while(1) .. accept and send
+
+   theiraddr comes with accept
+
 */
 
 #include <arpa/inet.h>

@@ -1,3 +1,14 @@
+/**
+
+    getaddrinfo
+    in loop - socket and connect
+    recv
+    close(socketfd)
+
+
+    NOTE - any side can use send or recv
+*/
+
 #include <arpa/inet.h>
 #include <errno.h>
 #include <netdb.h>

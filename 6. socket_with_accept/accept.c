@@ -25,7 +25,7 @@
        ITS ADDRESS IS PASSED TO accept()
 
        accept() will not put more than that many bytes into addr (struct sockaddr_storage ) . If it
-   pits fewer in, it will change the value of addrlen to reflect that
+   puts fewer in, it will change the value of addrlen to reflect that
 
 */
 
