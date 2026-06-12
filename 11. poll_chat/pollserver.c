@@ -162,6 +162,11 @@ int get_listener_socket() {
         return -1;
     }
 
+    if (listen(listener, 10) == -1) {
+        close(listener);
+        return -1;
+    }
+
     return listener;
 }
 
